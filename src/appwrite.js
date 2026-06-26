@@ -49,12 +49,21 @@ export const updateSearchCount = async (searchTerm, movie) => {
 
 export const getTrendingMovies = async () => {
   try {
-    const result = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
-      Query.orderDesc("count"),
-      Query.limit(10),
-    ]);
+    const result = await databases.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID,
+      [
+        Query.orderDesc("count"),
+        Query.limit(10),
+      ]
+    );
+
+    console.log("Trending Result:", result);
+    console.log("Documents:", result.documents);
+
     return result.documents;
   } catch (error) {
-    console.log("Error fetching the movies data from the appwrite database", error);
+    console.error("Trending Error:", error);
+    return [];
   }
 };

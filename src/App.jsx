@@ -91,17 +91,17 @@ const App = () => {
     }
   };
 
-  const loadTrendingMovies = async () => {
-    try {
-      const movies = await getTrendingMovies();
-      setTrendingMovies(movies || []);
-    } catch (error) {
-      console.error(
-        "Error fetching trending movies:",
-        error
-      );
-    }
-  };
+ const loadTrendingMovies = async () => {
+  try {
+    const movies = await getTrendingMovies();
+
+    console.log("Movies received:", movies);
+
+    setTrendingMovies(movies || []);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
   // Initial Load
   useEffect(() => {

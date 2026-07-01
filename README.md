@@ -1,16 +1,69 @@
-# React + Vite
+# 🎬 Movie Discovery App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based movie search and discovery application that lets users find movies via the OMDb API and see real-time trending searches, powered by Appwrite.
 
-Currently, two official plugins are available:
+**Live Demo:** [react-movie-application-eosin.vercel.app](https://react-movie-application-eosin.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🔍 **Movie Search** — Search for any movie by title using the OMDb API
+- 📈 **Trending Movies** — A dynamic trending section that ranks movies based on real aggregated search activity, not a static list
+- 🎨 **Responsive UI** — Clean, responsive interface built with React
+- ⚡ **Fast Dev Experience** — Powered by Vite with Hot Module Replacement (HMR)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How Trending Works
 
-## Expanding the ESLint configuration
+Every search a user makes is logged to an Appwrite database:
+- If the search term already exists, its count is incremented
+- If it's a new term, a document is created storing the search term, movie ID, and poster URL
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The trending section then queries the **top 10 most-searched movies** (ordered by count, descending) to surface what's actually popular with users — making it a data-driven feature rather than hardcoded content.
+
+## Tech Stack
+
+| Category | Technology |
+|---|---|
+| Frontend | React + Vite |
+| Movie Data | OMDb API |
+| Backend/Database | Appwrite |
+| Deployment | Vercel |
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following:
+
+```
+VITE_APPWRITE_PROJECT_ID=your_appwrite_project_id
+VITE_APPWRITE_DATABASE_ID=your_appwrite_database_id
+VITE_APPWRITE_COLLECTION_ID=your_appwrite_collection_id
+VITE_OMDB_API_KEY=your_omdb_api_key
+```
+
+> ⚠️ Note: Verify the exact OMDb API key variable name matches what's used in your search component.
+
+## Getting Started
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/RashiSingh1/React-Movie-Application.git
+   cd React-Movie-Application
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Add your `.env` file (see Environment Variables above)
+
+4. Run the development server
+   ```bash
+   npm run dev
+   ```
+
+## Deployment
+
+This project is deployed on [Vercel](https://vercel.com). Push to `main` to trigger automatic redeployment.
+
+## Author
+**Rashi Singh**
